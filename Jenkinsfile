@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('USER_DOCKERHUB')
+        DOCKERHUB_CREDENTIALS = credentials('docker-hub')
         DOCKER_IMAGE = 'ezequielg87/nestjs-pin1:latest'
     }
     stages {
