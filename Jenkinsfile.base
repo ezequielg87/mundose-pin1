@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+    stages {
+        stage('Install npm dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Run Jest tests') {
+            steps {
+                sh 'npm test'
+            }
+        }
+        stage('Build NestJs Code') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+        stage('Docker Build and Push') {
+            steps {
+                script {
+                    docker.build('mundose-pin1:latest').push('latest')
+                }
+            }
+        }
+        stage('Scan Image with Docker Scout') {
+            steps {
+                script {
+                    sh 'docker scout cves mundose-pin1:latest'
+                }
+            }
+        }
+    }
+}
