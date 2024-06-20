@@ -5,9 +5,19 @@ pipeline {
         DOCKER_IMAGE = 'ezequielg87/nestjs-pin1:latest'
     }
     stages {
-        stage('Checkout') {
+        // stage('Checkout') {
+        //     steps {
+        //         git 'https://github.com/ezequielg87/mundose-pin1.git'
+        //     }
+        // }
+        stage("Clone Git Repository") {
             steps {
-                git 'https://github.com/ezequielg87/mundose-pin1.git'
+                git(
+                    url: "https://github.com/ezequielg87/mundose-pin1.git",
+                    branch: "master",
+                    changelog: true,
+                    poll: true
+                )
             }
         }
         stage('Install dependencies') {
