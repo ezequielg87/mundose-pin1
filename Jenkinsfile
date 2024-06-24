@@ -5,6 +5,11 @@ pipeline {
         DOCKER_IMAGE = 'ezequielg87/nestjs-pin1:latest'
     }
     stages {
+        stage('Print PATH') {
+            steps {
+                sh 'echo $PATH'
+            }
+        }
         stage("Clone Git Repository") {
             steps {
                 git(
